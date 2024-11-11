@@ -26,19 +26,23 @@ import lombok.Setter;
         @NamedQuery(name = "Pedido.findByStatus", query = "SELECT p FROM PedidoEntity p WHERE p.status = :status"),
         @NamedQuery(name = "Pedido.update", query = "UPDATE PedidoEntity p SET p.status = :status WHERE p.id = :id"),
 })
+@Getter
+@Setter
 public class PedidoEntity {
     @Id
-    private @Getter @Setter UUID id;
-    private @Getter @Setter Status status;
+    private UUID id;
+    private Status status;
 
     @Column(name = "data_criacao")
-    private @Getter @Setter Instant dataCriacao;
+    private Instant dataCriacao;
 
     // @ManyToOne
     // @JoinColumn(name = "cliente_id")
     // private ClienteEntity cliente;
 
+    @Column(name = "cliente_id")
+    private UUID clienteId;
+
     @OneToMany(mappedBy = "pedido")
     Set<ItemPedidoEntity> itensPedidos;
-
 }

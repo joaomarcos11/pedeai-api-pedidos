@@ -43,19 +43,23 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
     @Override
     @Transactional
-    public void criar(Pedido pedido) {
+    public UUID criar(Pedido pedido) {
         try {
             PedidoEntity pedidoEntity = pedidoMapper.toEntity(pedido, pedido.getId(), itemMapper);
-            if (pedido.getIdCliente() != null) {
+            // if (pedido.getIdCliente() != null) {
                 // TODO: em vez de clienteEntity, vai salvar apenas id_cliente como UUID
                 // ClienteEntity clienteEntity = entityManager.find(ClienteEntity.class, pedido.getIdCliente());
                 // pedidoEntity.setCliente(clienteEntity);
-            }
+            // }
             entityManager.persist(pedidoEntity);
 
             for (ItemPedidoEntity itemPedidoEntity : pedidoEntity.getItensPedidos()) {
                 entityManager.merge(itemPedidoEntity);
             }
+
+            //TODO: é de boa ou tem que pegar do objeto criado no BD?
+            //TODO: imagino que por causa da integração com Pagamentos, poderia retornar UUID do pedido
+            return pedidoEntity.getId();
         } catch (PersistenceException e) {
             System.err.println(e.getMessage()); // TODO: trocar isso aqui
             throw new ErrorSqlException(ErrosSistemaEnum.DATABASE_ERROR.getMessage());

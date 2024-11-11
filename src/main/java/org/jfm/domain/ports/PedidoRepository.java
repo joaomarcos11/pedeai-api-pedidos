@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface PedidoRepository {
-    public void criar(Pedido pedido);
+    public UUID criar(Pedido pedido);
 
     public List<Pedido> listar();
 

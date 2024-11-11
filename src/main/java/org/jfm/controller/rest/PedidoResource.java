@@ -64,22 +64,23 @@ public class PedidoResource {
                                         @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.STRING, example = "Conflito"))
                         })
         })
-        // @POST
-        // public Response criar(
-        //                 @RequestBody(description = "Dados do pedido para criação", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = PedidoCreateDto.class))) PedidoCreateDto pedido) {
-        //         Pedido pedidoEntity = pedidoMapper.toDomain(pedido);
-        //         // Pagamento pedidoPagamento = pedidoUseCase.criar(pedidoEntity);
-        //         return Response.status(Response.Status.CREATED).entity(pedidoPagamento).build();
-        // }
+        @POST
+        public Response criar(
+                        @RequestBody(description = "Dados do pedido para criação", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = PedidoCreateDto.class))) PedidoCreateDto pedido) {
+                Pedido pedidoEntity = pedidoMapper.toDomain(pedido);
+                UUID pedidoId = pedidoUseCase.criar(pedidoEntity);
+                // Pagamento pedidoPagamento = pedidoUseCase.criar(pedidoEntity);
+                return Response.status(Response.Status.CREATED).entity(pedidoId).build();
+        }
 
-        // @Operation(summary = "Buscar pedidos", description = "Busca pedidos por status")
-        // @APIResponses(value = {
-        //                 @APIResponse(responseCode = "200", description = "Sucesso", content = {
-        //                                 @Content(mediaType = "application/json", schema = @Schema(implementation = PedidoDto.class)) }),
-        //                 @APIResponse(responseCode = "404", description = "Pedidos não encontrados", content = {
-        //                                 @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.STRING, example = "Pedidos não encontrados"))
-        //                 })
-        // })
+        @Operation(summary = "Buscar pedidos", description = "Busca pedidos por status")
+        @APIResponses(value = {
+                        @APIResponse(responseCode = "200", description = "Sucesso", content = {
+                                        @Content(mediaType = "application/json", schema = @Schema(implementation = PedidoDto.class)) }),
+                        @APIResponse(responseCode = "404", description = "Pedidos não encontrados", content = {
+                                        @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.STRING, example = "Pedidos não encontrados"))
+                        })
+        })
         @GET
         public Response buscar(
                         @QueryParam("status") @Parameter(description = "Status do pedido", example = "PAGO") Status status) {
