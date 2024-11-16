@@ -30,3 +30,4 @@ INSERT INTO pedidos_status (id, anterior, atual, data_criacao, pedido_id) VALUES
 -- INSERT INTO pedidos_status (id, anterior, atual, data_criacao, pedido_id) VALUES ('c0a0a1c1-987d-4c95-93df-a535eabbb96c', 4, 5, '2024-11-10 20:25:20', 'c215b5a1-9421-4cfd-982a-00f64f470252');
 
 -- INSERT INTO pedidos_pagamentos (pedido_id, pagamento_id, data_criacao) VALUES ('c215b5a1-9421-4cfd-982a-00f64f470252', 'c215b5a1-9421-4cfd-982a-00f64f470253', NOW());
+INSERT INTO pedidos (id, cliente_id, status, data_criacao) VALUES ('34d475e0-1a95-404a-964e-9f3d95eaa90e', 'e7fe16ff-38f9-43db-bee9-e535f04d4272', 2, NOW());

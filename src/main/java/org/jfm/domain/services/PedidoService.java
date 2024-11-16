@@ -233,7 +233,7 @@ public class PedidoService implements PedidoUseCase {
         return pedido.getStatus() == Status.PAGO;
     }
 
-    private int getStatusPrioridade(Status status) {
+    public int getStatusPrioridade(Status status) {
         switch (status) {
             case DISPONIVEL:
                 return 1;

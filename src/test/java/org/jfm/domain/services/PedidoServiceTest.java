@@ -5,16 +5,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.UUID;
 
-import org.jfm.domain.entities.Item;
 import org.jfm.domain.entities.Pedido;
 import org.jfm.domain.entities.PedidoStatus;
 import org.jfm.domain.entities.enums.Status;
 import org.jfm.domain.ports.PedidoPagamentoRepository;
 import org.jfm.domain.ports.PedidoStatusRepository;
 import org.jfm.domain.usecases.ItemUseCase;
-import org.jfm.factory.ItemFactory;
 import org.jfm.factory.PedidoFactory;
 import org.jfm.factory.PedidoStatusFactory;
 import org.jfm.infra.repository.adaptersql.PedidoRepositoryImpl;
@@ -66,7 +63,7 @@ public class PedidoServiceTest {
   public void testListarEmAndamento() {
     List<Pedido> pedidos = PedidoFactory.montarListaEmAndamento();
     
-    Assertions.assertEquals(service.listar(), pedidos);
+    Assertions.assertEquals(service.listarEmAndamento(), pedidos);
   }
 
   @Test
@@ -112,6 +109,31 @@ public class PedidoServiceTest {
     serviceMock.buscarHistoricoStatus(pedido.getId());
 
     verify(pedidoStatusRepository, times(1)).listarPorPedidoId(pedido.getId());
+  }
+
+  @Test
+  public void testEstaPago() {
+    Pedido pedido = PedidoFactory.montarPago();
+    Assertions.assertTrue(service.estaPago(pedido.getId()));
+    
+    pedido = PedidoFactory.montar();
+    Assertions.assertFalse(service.estaPago(pedido.getId()));
+  }
+
+  @Test
+  public void testGetStatusPrioridade() {
+    Pedido pedido = PedidoFactory.montar();
+    pedido.setStatus(Status.DISPONIVEL);
+    Assertions.assertEquals(service.getStatusPrioridade(pedido.getStatus()), 1);
+    
+    pedido.setStatus(Status.PREPARANDO);
+    Assertions.assertEquals(service.getStatusPrioridade(pedido.getStatus()), 2);
+    
+    pedido.setStatus(Status.PAGO);
+    Assertions.assertEquals(service.getStatusPrioridade(pedido.getStatus()), 3);
+    
+    pedido.setStatus(Status.AGUARDANDO_PAGAMENTO);
+    Assertions.assertEquals(service.getStatusPrioridade(pedido.getStatus()), 4);
   }
 
 }

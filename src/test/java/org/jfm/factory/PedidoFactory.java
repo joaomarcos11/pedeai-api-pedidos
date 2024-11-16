@@ -28,7 +28,7 @@ public class PedidoFactory {
   }
 
   public static Pedido montarPago() {
-    Pedido pedido = new Pedido(UUID.fromString("c215b5a1-9421-4cfd-982a-00f64f470252"), UUID.fromString("63a59178-39f8-4a28-a2c7-989a57ca7b54"), Status.PAGO);
+    Pedido pedido = new Pedido(UUID.fromString("34d475e0-1a95-404a-964e-9f3d95eaa90e"), UUID.fromString("e7fe16ff-38f9-43db-bee9-e535f04d4272"), Status.PAGO, Instant.now());
     pedido.setDataCriacao(Instant.now()); // TODO: mudar aqui e no import para string constante
     
     return pedido;
@@ -37,7 +37,8 @@ public class PedidoFactory {
   public static List<Pedido> montarListaOrdenada() {
     List<Pedido> pedidos = new ArrayList<Pedido>(List.of(
       new Pedido(UUID.fromString("c215b5a1-9421-4cfd-982a-00f64f470252"), UUID.fromString("63a59178-39f8-4a28-a2c7-989a57ca7b54"), Status.AGUARDANDO_PAGAMENTO, Instant.now()),
-      new Pedido(UUID.fromString("7f7e383e-58e2-43b6-a18a-f507003b45f8"), UUID.fromString("e7fe16ff-38f9-43db-bee9-e535f04d4272"), Status.CONCLUIDO, Instant.now())
+      new Pedido(UUID.fromString("7f7e383e-58e2-43b6-a18a-f507003b45f8"), UUID.fromString("e7fe16ff-38f9-43db-bee9-e535f04d4272"), Status.CONCLUIDO, Instant.now()),
+      new Pedido(UUID.fromString("34d475e0-1a95-404a-964e-9f3d95eaa90e"), UUID.fromString("e7fe16ff-38f9-43db-bee9-e535f04d4272"), Status.PAGO, Instant.now())
     ));
 
     Collections.sort(pedidos, new Comparator<Pedido>() {
@@ -71,8 +72,7 @@ public class PedidoFactory {
 
   public static List<Pedido> montarListaEmAndamento() {
     List<Pedido> pedidos = new ArrayList<Pedido>(List.of(
-      new Pedido(UUID.fromString("c215b5a1-9421-4cfd-982a-00f64f470252"), UUID.fromString("63a59178-39f8-4a28-a2c7-989a57ca7b54"), Status.AGUARDANDO_PAGAMENTO, Instant.now()),
-      new Pedido(UUID.fromString("7f7e383e-58e2-43b6-a18a-f507003b45f8"), UUID.fromString("e7fe16ff-38f9-43db-bee9-e535f04d4272"), Status.CONCLUIDO, Instant.now())
+      new Pedido(UUID.fromString("34d475e0-1a95-404a-964e-9f3d95eaa90e"), UUID.fromString("e7fe16ff-38f9-43db-bee9-e535f04d4272"), Status.PAGO, Instant.now())
     ));
 
     return pedidos;
