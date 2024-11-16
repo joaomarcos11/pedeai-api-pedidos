@@ -30,8 +30,8 @@ public class PedidoStatusEntity {
     private Status anterior;
     private Status atual;
 
-    @Column(name = "data")
-    private Instant data;
+    @Column(name = "data_criacao")
+    private Instant dataCriacao;
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")

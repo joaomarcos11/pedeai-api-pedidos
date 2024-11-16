@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.jfm.controller.rest.restclient.ClienteServiceClient;
+// import org.jfm.controller.rest.restclient.ClienteServiceClient;
 import org.jfm.domain.entities.Item;
 import org.jfm.domain.entities.Pedido;
 import org.jfm.domain.entities.PedidoStatus;
@@ -41,9 +41,9 @@ public class PedidoService implements PedidoUseCase {
 
     ItemUseCase itemUseCase;
 
-    @Inject
-    @RestClient
-    ClienteServiceClient clienteServiceClient;
+    // @Inject
+    // @RestClient
+    // ClienteServiceClient clienteServiceClient;
 
     // ClienteUseCase clienteUseCase;
 
@@ -54,17 +54,19 @@ public class PedidoService implements PedidoUseCase {
     private static final Set<Status> STATUS_EM_ANDAMENTO = EnumSet.of(Status.PAGO, Status.PREPARANDO,
             Status.DISPONIVEL);
 
-    public PedidoService(PedidoRepository pedidoRepository, PedidoStatusRepository pedidoStatusRepository,
-            PedidoPagamentoRepository pedidoPagamentoRepository, ItemUseCase itemUseCase, 
-            ClienteServiceClient clienteServiceClient) {
+    public PedidoService(
+        PedidoRepository pedidoRepository, 
+        PedidoStatusRepository pedidoStatusRepository,
+        ItemUseCase itemUseCase) {
+        // ClienteServiceClient clienteServiceClient) {
         this.pedidoRepository = pedidoRepository;
         this.pedidoStatusRepository = pedidoStatusRepository;
-        this.pedidoPagamentoRepository = pedidoPagamentoRepository;
+        // this.pedidoPagamentoRepository = pedidoPagamentoRepository;
         // this.clienteUseCase = clienteUseCase;
         this.itemUseCase = itemUseCase;
         // this.pagamentoGateway = pagamentoGateway;
         // this.notificacao = notificacao;
-        this.clienteServiceClient = clienteServiceClient;
+        // this.clienteServiceClient = clienteServiceClient;
     }
 
     // TODO: rescrever metodo
@@ -171,6 +173,7 @@ public class PedidoService implements PedidoUseCase {
     public List<Pedido> listarEmAndamento() {
         List<Pedido> pedidos = pedidoRepository.listar();
 
+        // TODO: jogar pra utils?
         pedidos = pedidos.stream()
                 .filter(pedido -> STATUS_EM_ANDAMENTO.contains(pedido.getStatus()))
                 .sorted(Comparator.comparing(Pedido::getStatus, Comparator.comparingInt(this::getStatusPrioridade))
@@ -210,27 +213,13 @@ public class PedidoService implements PedidoUseCase {
         pedidoStatusRepository.criar(pedidoStatus);
     };
 
-    // private Pagamento criarPagamento(Pedido pedido) {
-    //     Cliente cliente = this.clienteUseCase.buscarPorId(pedido.getIdCliente());
-
-    //     int valorFinal = 0;
-    //     StringBuilder descricao = new StringBuilder();
-
-    //     for (Item item : pedido.getItens().keySet()) {
-    //         descricao.append(item.getId() + " // " + item.getNome() + " // " + item.getPreco());
-    //         valorFinal += pedido.getItens().get(item);
-    //     }
-
-    //     return pagamentoGateway.criarPagamento(cliente, pedido, valorFinal);
-    // }
-
     @Override
     public List<PedidoStatus> buscarHistoricoStatus(UUID id) {
         List<PedidoStatus> pedidosStatus = pedidoStatusRepository.listarPorPedidoId(id);
 
         Collections.sort(pedidosStatus, new Comparator<PedidoStatus>() {
             public int compare(PedidoStatus ped1, PedidoStatus ped2) {
-                return ped2.getData().compareTo(ped1.getData());
+                return ped2.getDataCriacao().compareTo(ped1.getDataCriacao());
             }
         });
 

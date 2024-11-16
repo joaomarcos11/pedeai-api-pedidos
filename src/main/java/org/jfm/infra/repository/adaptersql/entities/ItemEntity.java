@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "itens")
 @NamedQueries({
@@ -23,8 +25,6 @@ import lombok.Setter;
         @NamedQuery(name = "Item.delete", query = "DELETE FROM ItemEntity i WHERE i.id = :id"),
         @NamedQuery(name = "Item.findByCategoria", query = "SELECT i FROM ItemEntity i WHERE i.categoria = :categoria"),
 })
-@Getter
-@Setter
 public class ItemEntity {
 
     @Id

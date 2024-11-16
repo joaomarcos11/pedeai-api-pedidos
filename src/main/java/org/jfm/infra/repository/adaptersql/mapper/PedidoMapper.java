@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import org.jfm.bootloader.QuarkusMappingConfig;
 import org.jfm.domain.entities.Item;
 import org.jfm.domain.entities.Pedido;
-// import org.jfm.infra.repository.adaptersql.entities.ClienteEntity;
 import org.jfm.infra.repository.adaptersql.entities.ItemEntity;
 import org.jfm.infra.repository.adaptersql.entities.ItemPedidoEntity;
 import org.jfm.infra.repository.adaptersql.entities.ItemPedidoKey;
@@ -24,7 +23,6 @@ import org.mapstruct.Named;
 @Mapper(config = QuarkusMappingConfig.class)
 public interface PedidoMapper {
     
-    @Mapping(target = "idCliente", source = "pedido.cliente.id")
     @Mapping(target = "itens", source = "itensPedidos", qualifiedByName = "itensEntityToUuid")
     Pedido toDomain(PedidoEntity pedido, @Context ItemMapper itemMapper);
 
@@ -33,20 +31,8 @@ public interface PedidoMapper {
         return itemPedido.stream().collect(Collectors.toMap(e -> itemMapper.toDomain(e.getItem()), ItemPedidoEntity::getQuantidade));
     }
 
-    @Mapping(target = "cliente", source = "idCliente", qualifiedByName = "clienteUuidToEntity")
     @Mapping(target = "itensPedidos", source = "itens", qualifiedByName = "itensToItemPedidoEntity")
     PedidoEntity toEntity(Pedido pedido, @Context UUID pedidoUuid, @Context ItemMapper itemMapper);
-
-    // @Named("clienteUuidToEntity")
-    // public static ClienteEntity clienteUuidToEntity(UUID idCliente) {
-    //     if (idCliente == null) {
-    //         return null;
-    //     }
-
-    //     ClienteEntity clienteEntity = new ClienteEntity();
-    //     clienteEntity.setId(idCliente);
-    //     return clienteEntity;
-    // }
 
     @Named("itensToItemPedidoEntity")
     public static Set<ItemPedidoEntity> itensToItemPedidoEntity(Map<Item, Integer> itens, @Context UUID pedidoUuid, @Context ItemMapper itemMapper) {

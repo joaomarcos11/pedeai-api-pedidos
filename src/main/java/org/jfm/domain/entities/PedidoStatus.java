@@ -19,7 +19,7 @@ public class PedidoStatus {
     private UUID idPedido;
     private Status anterior;
     private Status atual;
-    private Instant data;
+    private Instant dataCriacao;
 
     private static final List<Status> LISTA_STATUS = new ArrayList<>(Arrays.asList(
         // Status.AGUARDANDO_PAGAMENTO,
@@ -42,7 +42,23 @@ public class PedidoStatus {
         this.idPedido = idPedido;
         this.anterior = anterior;
         this.atual = atual;
-        this.data = Instant.now();
+        this.dataCriacao = Instant.now();
+
+        validar(); //TODO: aqui mesmo?
+    }
+
+    public PedidoStatus(
+        UUID id, 
+        UUID idPedido,
+        Status anterior,
+        Status atual,
+        Instant dataCriacao
+     ) {
+        this.id = id;
+        this.idPedido = idPedido;
+        this.anterior = anterior;
+        this.atual = atual;
+        this.dataCriacao = dataCriacao;
 
         validar(); //TODO: aqui mesmo?
     }

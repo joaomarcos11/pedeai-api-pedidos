@@ -26,6 +26,15 @@ public class Item {
         this.imagem = imagem;
     }
 
+    public Item(Categoria categoria, int preco, UUID id, String nome, String descricao, String imagem) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.descricao = descricao;
+        this.imagem = imagem;
+    }
+
     public UUID getId() {
         return id;
     }

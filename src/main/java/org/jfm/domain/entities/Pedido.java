@@ -13,11 +13,20 @@ public class Pedido {
     private Status status;
     private Map<Item, Integer> itens;
     private Instant dataCriacao;
-    
+
+    public Pedido() {}
+
     public Pedido(UUID id, UUID idCliente, Status status) {
         this.id = id;
         this.idCliente = idCliente;
         this.status = status;
+    }
+    
+    public Pedido(UUID id, UUID idCliente, Status status, Instant dataCricao) {
+        this.id = id;
+        this.idCliente = idCliente;
+        this.status = status;
+        this.dataCriacao = dataCricao;
     }
 
     public UUID getId() {

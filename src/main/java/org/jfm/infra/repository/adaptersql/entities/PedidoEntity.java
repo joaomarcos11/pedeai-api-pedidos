@@ -9,8 +9,8 @@ import org.jfm.domain.entities.enums.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -41,7 +41,7 @@ public class PedidoEntity {
     // private ClienteEntity cliente;
 
     @Column(name = "cliente_id")
-    private UUID clienteId;
+    private UUID idCliente;
 
     @OneToMany(mappedBy = "pedido")
     Set<ItemPedidoEntity> itensPedidos;

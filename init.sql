@@ -1,4 +1,4 @@
-\connect "pedeai";
+\connect "pedeai-pedidos";
 
 CREATE TABLE "public"."itens" (
     "categoria" smallint,
@@ -43,7 +43,6 @@ CREATE TABLE "public"."pedidos" (
     "status" smallint,
     "data_criacao" timestamptz(6),
     "cliente_id" uuid,
-    "cliente_registrado" boolean NOT NULL, -- TODO: validar campo em init.sql
     "id" uuid NOT NULL,
     CONSTRAINT "pedidos_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
@@ -64,7 +63,7 @@ CREATE TABLE "public"."pedidos_status" (
     "id" uuid NOT NULL,
     "anterior" smallint,
     "atual" smallint NOT NULL,
-    "data" timestamptz(6) NOT NULL,
+    "data_criacao" timestamptz(6) NOT NULL,
     "pedido_id" uuid NOT NULL,
     CONSTRAINT "pedidos_status_pkey" PRIMARY KEY  ("id"),
     CONSTRAINT "pedidos_status_pedido_id_fkey" FOREIGN KEY ("pedido_id") REFERENCES "public"."pedidos" ("id")
