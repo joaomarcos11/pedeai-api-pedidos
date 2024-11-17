@@ -170,6 +170,7 @@ public class PedidoRepositoryImplTest {
     assertThrows(ErrorSqlException.class, () -> repositoryMock.listarPorStatus(Status.AGUARDANDO_PAGAMENTO));
   }
 
+  // TODO
   // @Test
   // public void testListarItensDoPedido() {
   //   // Pedido pedidoMontado = PedidoFactory.montar();
