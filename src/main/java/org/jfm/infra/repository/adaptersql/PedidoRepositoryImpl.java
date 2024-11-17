@@ -57,11 +57,8 @@ public class PedidoRepositoryImpl implements PedidoRepository {
                 entityManager.merge(itemPedidoEntity);
             }
 
-            //TODO: é de boa ou tem que pegar do objeto criado no BD?
-            //TODO: imagino que por causa da integração com Pagamentos, poderia retornar UUID do pedido
             return pedidoEntity.getId();
         } catch (PersistenceException e) {
-            System.err.println(e.getMessage()); // TODO: trocar isso aqui
             throw new ErrorSqlException(ErrosSistemaEnum.DATABASE_ERROR.getMessage());
         }
     }
@@ -146,7 +143,7 @@ public class PedidoRepositoryImpl implements PedidoRepository {
     public void editarItensDoPedido(Pedido pedido) {
         try {
             entityManager.persist(pedido);
-        } catch (Exception e) {
+        } catch (PersistenceException e) { // TODO
             throw new ErrorSqlException(ErrosSistemaEnum.DATABASE_ERROR.getMessage()); // TODO: trocar essa exception aqui
         }
     }

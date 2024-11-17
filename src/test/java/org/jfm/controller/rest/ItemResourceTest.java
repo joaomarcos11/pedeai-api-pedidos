@@ -1,28 +1,47 @@
-// package org.jfm.controller.rest;
+package org.jfm.controller.rest;
 
-// import java.util.ArrayList;
-// import java.util.List;
-// import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-// import org.jfm.controller.rest.dto.ItemCreateUpdateDto;
-// import org.jfm.controller.rest.mapper.ItemMapper;
-// import org.jfm.domain.entities.Item;
-// import org.jfm.domain.entities.enums.Categoria;
-// import org.jfm.domain.usecases.ItemUseCase;
-// import org.junit.jupiter.api.Assertions;
-// import org.junit.jupiter.api.Test;
+import org.jfm.controller.rest.dto.ItemCreateUpdateDto;
+import org.jfm.controller.rest.mapper.ItemMapper;
+import org.jfm.domain.entities.Item;
+import org.jfm.domain.entities.enums.Categoria;
+import org.jfm.domain.usecases.ItemUseCase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-// import io.quarkus.test.InjectMock;
-// import io.quarkus.test.common.http.TestHTTPEndpoint;
-// import io.quarkus.test.junit.QuarkusTest;
-// import jakarta.inject.Inject;
-// import jakarta.ws.rs.core.Response;
+import io.quarkus.test.InjectMock;
+import io.quarkus.test.common.http.TestHTTPEndpoint;
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 
-// import static io.restassured.RestAssured.given;
-// import static io.restassured.RestAssured.when;
-// import static org.hamcrest.CoreMatchers.is;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.CoreMatchers.is;
 
-// import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.when;
+
+@QuarkusTest
+public class ItemResourceTest {
+
+  @Inject
+  ItemResource itemResource;
+
+  @InjectMock
+  ItemUseCase itemUseCase;
+
+  @InjectMock
+  ItemMapper itemMapper;
+
+  // @Test
+  // public void testCriar() {
+  //   var dto = new ItemCreateUpdateDto();
+  // }
+
+}
 
 // @QuarkusTest
 // @TestHTTPEndpoint(ItemResource.class)

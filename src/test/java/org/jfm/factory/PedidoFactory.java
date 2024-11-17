@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.jfm.domain.entities.Item;
 import org.jfm.domain.entities.Pedido;
 import org.jfm.domain.entities.PedidoStatus;
+import org.jfm.domain.entities.enums.Categoria;
 import org.jfm.domain.entities.enums.Status;
 
 public class PedidoFactory {
@@ -84,6 +88,17 @@ public class PedidoFactory {
     ));
 
     return pedidos;
+  }
+
+  public static Map<Item, Integer> montarItensPedidos() {
+    Map<Item, Integer> lista = new HashMap<Item, Integer>();
+    Item item1 = new Item(Categoria.BEBIDA,	350,	UUID.fromString("23e52205-4d9d-41e6-a7f3-271af4f5316b"),	"REFRIGERANTE", "um delicioso refrigerante", "/var/app/imagens/refrigerante.jpg");
+    Item item2 = new Item(Categoria.ACOMPANHAMENTO,	675,	UUID.fromString("f66d8bf8-f350-46ba-8893-902bfd3e556e"),	"BATATA FRITA", "batata-frita salgada", "/var/app/imagens/batata-frita.jpg");
+
+    lista.put(item1, 1);
+    lista.put(item2, 1);
+
+    return lista;
   }
 
   private static Instant getDataCriacaoMock(String data) {
