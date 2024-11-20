@@ -14,6 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jfm.controller.rest.client.ClienteService;
 // import org.jfm.controller.rest.restclient.ClienteServiceClient;
 import org.jfm.domain.entities.Item;
 import org.jfm.domain.entities.Pedido;
@@ -41,15 +42,8 @@ public class PedidoService implements PedidoUseCase {
 
     ItemUseCase itemUseCase;
 
-    // @Inject
-    // @RestClient
-    // ClienteServiceClient clienteServiceClient;
-
-    // ClienteUseCase clienteUseCase;
-
-    // PagamentoGateway pagamentoGateway;
-
-    // Notificacao notificacao;
+    @RestClient
+    ClienteService clienteService;
 
     private static final Set<Status> STATUS_EM_ANDAMENTO = EnumSet.of(Status.PAGO, Status.PREPARANDO,
             Status.DISPONIVEL);
@@ -58,15 +52,9 @@ public class PedidoService implements PedidoUseCase {
         PedidoRepository pedidoRepository, 
         PedidoStatusRepository pedidoStatusRepository,
         ItemUseCase itemUseCase) {
-        // ClienteServiceClient clienteServiceClient) {
         this.pedidoRepository = pedidoRepository;
         this.pedidoStatusRepository = pedidoStatusRepository;
-        // this.pedidoPagamentoRepository = pedidoPagamentoRepository;
-        // this.clienteUseCase = clienteUseCase;
         this.itemUseCase = itemUseCase;
-        // this.pagamentoGateway = pagamentoGateway;
-        // this.notificacao = notificacao;
-        // this.clienteServiceClient = clienteServiceClient;
     }
 
     // TODO: rescrever metodo
@@ -74,9 +62,10 @@ public class PedidoService implements PedidoUseCase {
     public UUID criar(Pedido pedido) {
         pedido.validar();
 
-        // if (pedido.getIdCliente() != null) {
-        //     clienteUseCase.buscarPorId(pedido.getIdCliente()); // vai buscar se existe o cliente
-        // }
+        if (pedido.getIdCliente() != null) {
+            // clienteUseCase.buscarPorId(pedido.getIdCliente()); // vai buscar se existe o cliente
+            clienteService.buscarPorId(pedido.getIdCliente());
+        }
 
         List<Item> itens = itemUseCase.listar();
         
@@ -108,17 +97,18 @@ public class PedidoService implements PedidoUseCase {
         pedido.setId(id);
         pedido.setDataCriacao(Instant.now());
         pedido.setStatus(Status.AGUARDANDO_PAGAMENTO);
-        if (pedido.getIdCliente() == null) {
-            pedido.setIdCliente(UUID.randomUUID()); // TODO: confirmar se para pedidos anonimos, vai se criar um UUID em idCliente para controle
-            // pedido.setClienteRegistrado(false); // TODO: validar campo em init.sql
-        } else {
-            // pedido.setClienteRegistrado(true); // TODO: validar campo em init.sql
-        }
+        // if (pedido.getIdCliente() == null) {
+        //     pedido.setIdCliente(UUID.randomUUID()); // TODO: confirmar se para pedidos anonimos, vai se criar um UUID em idCliente para controle
+        //     // pedido.setClienteRegistrado(false); // TODO: validar campo em init.sql
+        // } else {
+        //     // pedido.setClienteRegistrado(true); // TODO: validar campo em init.sql
+        // }
 
-        System.out.println(pedido.getItens().size());
-        System.out.println(pedido.getItens().toString());
+        // System.out.println(pedido.getItens().size());
+        // System.out.println(pedido.getItens().toString());
 
         UUID pedidoId = pedidoRepository.criar(pedido);
+        // pedidoRepository.criar(pedido);
 
         pedidoStatusRepository.criar(new PedidoStatus(UUID.randomUUID(), id, null, pedido.getStatus()));
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.jfm.controller.rest.dto.ItemCreateUpdateDto;
+import org.jfm.controller.rest.dto.PedidoCreateDto;
 import org.jfm.controller.rest.dto.PedidoUpdateDto;
 import org.jfm.controller.rest.mapper.ItemMapper;
 import org.jfm.controller.rest.mapper.PedidoMapper;
@@ -17,6 +18,7 @@ import org.jfm.domain.valueobjects.ItemPedido;
 import org.jfm.factory.ItemFactory;
 import org.jfm.factory.PedidoFactory;
 import org.jfm.factory.dto.ItemCreateUpdateDtoFactory;
+import org.jfm.factory.dto.PedidoCreateDtoFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -50,6 +52,24 @@ public class PedidoResourceTest {
   public void setup() {
     MockitoAnnotations.openMocks(this);
   }
+
+  // @Test
+  // public void testCriar() {
+  //   PedidoCreateDto dto = PedidoCreateDtoFactory.montar();
+
+  //   Pedido pedido = new Pedido();
+  //   pedido.setIdCliente(null);
+
+  //   Mockito.when(pedidoMapper.toDomain(dto)).thenReturn(pedido);
+  //   Mockito.when(pedidoUseCase.criar(pedido)).thenReturn(pedido.getId());
+
+  //   given()
+  //     .contentType(ContentType.JSON)
+  //     .body(dto)
+  //     .when()
+  //     .post("/pedidos")
+  //     .then().statusCode(201);
+  // }
 
   @Test
   public void testBuscar() {

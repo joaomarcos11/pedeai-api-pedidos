@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.jfm.domain.entities.Pedido;
 import org.jfm.domain.entities.PedidoStatus;
@@ -50,6 +51,18 @@ public class PedidoServiceTest {
   @BeforeEach
   void setUp() {
     MockitoAnnotations.openMocks(this);
+  }
+
+  @Test
+  public void testCriarAnonimo() {
+    Pedido pedido = PedidoFactory.montar();
+    pedido.setId(UUID.randomUUID());
+    pedido.setIdCliente(null);
+    pedido.setItens(PedidoFactory.montarItensPedidos());
+
+    serviceMock.criar(pedido);
+
+    verify(repository, times(1)).criar(pedido);
   }
 
   @Test
