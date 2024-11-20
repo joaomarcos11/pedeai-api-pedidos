@@ -10,25 +10,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-// import org.jfm.domain.entities.Cliente;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jfm.controller.rest.client.ClienteService;
-// import org.jfm.controller.rest.restclient.ClienteServiceClient;
 import org.jfm.domain.entities.Item;
 import org.jfm.domain.entities.Pedido;
 import org.jfm.domain.entities.PedidoStatus;
 import org.jfm.domain.entities.enums.Status;
 import org.jfm.domain.ports.PedidoRepository;
 import org.jfm.domain.ports.PedidoStatusRepository;
-// import org.jfm.domain.usecases.ClienteUseCase;
 import org.jfm.domain.usecases.ItemUseCase;
 import org.jfm.domain.ports.PedidoPagamentoRepository;
-// import org.jfm.domain.ports.Notificacao;
-// import org.jfm.domain.ports.PagamentoGateway;
 import org.jfm.domain.usecases.PedidoUseCase;
-// import org.jfm.domain.valueobjects.Pagamento;
 
 import jakarta.inject.Inject;
 
@@ -42,6 +36,7 @@ public class PedidoService implements PedidoUseCase {
 
     ItemUseCase itemUseCase;
 
+    @Inject
     @RestClient
     ClienteService clienteService;
 
@@ -111,7 +106,7 @@ public class PedidoService implements PedidoUseCase {
         // pedidoRepository.criar(pedido);
 
         pedidoStatusRepository.criar(new PedidoStatus(UUID.randomUUID(), id, null, pedido.getStatus()));
-
+        System.out.println("///////////4");
         // Pagamento pagamento = criarPagamento(pedido);
         // TODO: vai chamar o microsserviço de pagamento?
 
