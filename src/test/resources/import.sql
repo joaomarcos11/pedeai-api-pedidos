@@ -24,6 +24,8 @@ INSERT INTO itens_pedidos (item_id, pedido_id, quantidade) VALUES ('9b5b286e-e61
 INSERT INTO pedidos (id, cliente_id, status, data_criacao) VALUES ('7f7e383e-58e2-43b6-a18a-f507003b45f8', 'e7fe16ff-38f9-43db-bee9-e535f04d4272', 5, NOW());
 INSERT INTO itens_pedidos (item_id, pedido_id, quantidade) VALUES ('9b5b286e-e617-4f20-80ad-1824c97ec71b', '7f7e383e-58e2-43b6-a18a-f507003b45f8', 2);
 
+INSERT INTO pedidos (id, cliente_id, status, data_criacao) VALUES ('1e9873d8-43b8-4440-a0f9-68b05032af11', 'e7fe16ff-38f9-43db-bee9-e535f04d4272', 4, NOW());
+
 INSERT INTO pedidos_status (id, anterior, atual, data_criacao, pedido_id) VALUES ('19ca0888-b83a-4380-a974-167d0f76f091', 3, 4, NOW(), 'c215b5a1-9421-4cfd-982a-00f64f470252');
 INSERT INTO pedidos_status (id, anterior, atual, data_criacao, pedido_id) VALUES ('c0a0a1c1-987d-4c95-93df-a535eabbb96c', 4, 5, NOW(), 'c215b5a1-9421-4cfd-982a-00f64f470252');
 -- INSERT INTO pedidos_status (id, anterior, atual, data_criacao, pedido_id) VALUES ('19ca0888-b83a-4380-a974-167d0f76f091', 3, 4, '2024-11-10 20:23:20', 'c215b5a1-9421-4cfd-982a-00f64f470252');
