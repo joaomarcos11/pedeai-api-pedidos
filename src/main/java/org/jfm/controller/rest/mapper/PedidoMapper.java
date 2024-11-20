@@ -36,8 +36,8 @@ public interface PedidoMapper {
         
         for (ItemPedidoCreateDto itemPedidoCreateDto : itensPedidosDto) {
             Item item = new Item();
-            item.setId(itemPedidoCreateDto.idItem());
-            itensPedidos.put(item, itemPedidoCreateDto.quantidade());
+            item.setId(itemPedidoCreateDto.getIdItem());
+            itensPedidos.put(item, itemPedidoCreateDto.getQuantidade());
         }
 
         return itensPedidos;

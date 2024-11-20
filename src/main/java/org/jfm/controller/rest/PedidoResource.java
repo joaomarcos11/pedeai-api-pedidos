@@ -157,7 +157,7 @@ public class PedidoResource {
 
                 Pedido pedidoEntity = pedidoMapper.toDomain(pedido);
                 pedidoEntity.setId(id);
-                pedidoEntity.setStatus(pedido.status());
+                pedidoEntity.setStatus(pedido.getStatus());
                 pedidoUseCase.editar(pedidoEntity);
 
                 return Response.status(Response.Status.OK).build();
