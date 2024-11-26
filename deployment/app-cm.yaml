@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-cm
+data:
+  DB_HOST: "DB_HOST_ADDRESS"
+  DB_PORT: "5432"
+  DB_USER: "pedeai-pedidos"
+  DB_NAME: "pedeai-pedidos"
+  DB_PASS: "senha1ABC"
+  # MERCADOPAGO_ACCESS_TOKEN: "TEST-2264542418620742-071218-7d3617ac63f2a2910c460921871806bd-487874941"
+  # GATEWAY_PAGAMENTO_MOCK: "true"

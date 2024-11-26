@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deploy
+spec:
+  selector:
+    matchLabels:
+      app: pedeai-pedidos
+  template:
+    metadata:
+      labels:
+        app: pedeai-pedidos
+    spec:
+      containers:
+        - name: pedeai-pedidos
+          image: DOCKER_IMAGE
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: app-cm
+          resources:
+            requests:
+              cpu: 200m

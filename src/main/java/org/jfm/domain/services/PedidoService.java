@@ -106,7 +106,6 @@ public class PedidoService implements PedidoUseCase {
         // pedidoRepository.criar(pedido);
 
         pedidoStatusRepository.criar(new PedidoStatus(UUID.randomUUID(), id, null, pedido.getStatus()));
-        System.out.println("///////////4");
         // Pagamento pagamento = criarPagamento(pedido);
         // TODO: vai chamar o microsserviço de pagamento?
 
