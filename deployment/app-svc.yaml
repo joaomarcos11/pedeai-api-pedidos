@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: pedeai
+    app: pedeai-pedidos
   type: ClusterIP
   ports:
     - protocol: TCP
