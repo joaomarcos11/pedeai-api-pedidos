@@ -24,7 +24,7 @@
   <sonar.language>java</sonar.language>
   <sonar.host.url>http://localhost:9000</sonar.host.url>
   <sonar.coverage.jacoco.xmlReportPaths>
-    ../pedeai-api-pedidos/target/jacoco-report/jacoco.xml
+    ../pedeai-api-pedidos/target/site/jacoco/jacoco.xml
    </sonar.coverage.jacoco.xmlReportPaths>
 </properties>
 
