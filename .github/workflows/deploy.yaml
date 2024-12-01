@@ -4,6 +4,8 @@ on:
   pull_request:
     branches: [main]
 
+  workflow_dispatch:
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -79,15 +81,15 @@ jobs:
           IMAGE_TAG: ${{ steps.commit.outputs.short }}
           DB_HOST_ADDRESS: ${{ env.DB_HOST_ADDRESS }}
         run: |
-          sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" deployment/app-deploy.yaml && \
-          sed -i.bak "s|DB_HOST_ADDRESS|$DB_HOST_ADDRESS|g" deployment/app-cm.yaml
+          sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" deployment/app-pedidos-deploy.yaml && \
+          sed -i.bak "s|DB_HOST_ADDRESS|$DB_HOST_ADDRESS|g" deployment/app-pedidos-cm.yaml
 
       - name: Deploy to EKS
         run: |
-          kubectl apply -f deployment/app-cm.yaml
-          kubectl apply -f deployment/app-deploy.yaml
-          kubectl apply -f deployment/app-svc.yaml
-          kubectl apply -f deployment/app-hpa.yaml
+          kubectl apply -f deployment/app-pedidos-cm.yaml
+          kubectl apply -f deployment/app-pedidos-deploy.yaml
+          kubectl apply -f deployment/app-pedidos-svc.yaml
+          kubectl apply -f deployment/app-pedidos-hpa.yaml
       
       - name: Wait for LB and deploy to EKS
         run: |

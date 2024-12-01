@@ -11,20 +11,27 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: app-svc
+            name: app-pedidos-svc
             port:
               number: 8080
       - path: /itens
         pathType: Prefix
         backend:
           service:
-            name: app-svc
+            name: app-pedidos-svc
             port:
               number: 8080
       - path: /pedidos
         pathType: Prefix
         backend:
           service:
-            name: app-svc
+            name: app-pedidos-svc
             port:
               number: 8080
+      - path: /clientes
+        pathType: Prefix
+        backend:
+          service:
+            name: app-clientes-svc
+            port:
+              number: 8081

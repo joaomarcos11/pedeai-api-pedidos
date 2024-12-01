@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-cm
+  name: app-pedidos-cm
 data:
   DB_HOST: "DB_HOST_ADDRESS"
   DB_PORT: "5432"
-  DB_USER: "pedeai-pedidos"
-  DB_NAME: "pedeai-pedidos"
+  DB_USER: "pedeai"
+  DB_NAME: "pedeaipedidos"
   DB_PASS: "senha1ABC"

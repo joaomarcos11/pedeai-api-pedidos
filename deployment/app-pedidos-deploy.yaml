@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deploy
+  name: app-pedidos-deploy
 spec:
   selector:
     matchLabels:
@@ -18,7 +18,7 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: app-cm
+                name: app-pedidos-cm
           resources:
             requests:
               cpu: 200m

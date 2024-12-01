@@ -52,8 +52,8 @@ public class PedidoResource {
 
         @Operation(summary = "Criar pedido", description = "Cria um novo pedido")
         @APIResponses(value = {
-                        // @APIResponse(responseCode = "201", description = "Sucesso", content = {
-                        //                 @Content(mediaType = "application/json", schema = @Schema(implementation = Pagamento.class)) }),
+                        @APIResponse(responseCode = "201", description = "Sucesso", content = {
+                                        @Content(mediaType = "application/json", schema = @Schema(implementation = UUID.class)) }),
                         @APIResponse(responseCode = "400", description = "Bad Request", content = {
                                         @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.STRING, example = "Bad Request"))
                         }),
