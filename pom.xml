@@ -18,6 +18,9 @@
   <org.mapstruct.version>1.6.2</org.mapstruct.version>
   <lombok.version>1.18.34</lombok.version>
   <jacoco.version>0.8.12</jacoco.version>
+  <sonar.coverage.jacoco.xmlReportPaths>
+    ../pedeai-api-pedidos/target/jacoco-report/jacoco.xml
+ </sonar.coverage.jacoco.xmlReportPaths>
 </properties>
 
 <dependencyManagement>
