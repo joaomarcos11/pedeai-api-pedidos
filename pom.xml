@@ -173,6 +173,7 @@
 </dependencies>
 
 <build>
+<pluginManagement>
   <plugins>
       <plugin>
           <groupId>${quarkus.platform.group-id}</groupId>
@@ -220,7 +221,7 @@
           </configuration>
       </plugin>
 
-      <plugin>
+      <!-- <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${jacoco.version}</version>
@@ -239,7 +240,7 @@
                 </goals>
             </execution>
         </executions>
-    </plugin>
+    </plugin> -->
 
     <!-- Dependencies needed for creating SonarQube coverage reports -->
     <!-- <plugin>
@@ -322,8 +323,19 @@
                 </path>
             </annotationProcessorPaths>
         </configuration>
+        </plugin>
+    <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.10.0.2594</version>
+    </plugin>
+    <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
     </plugin>
   </plugins>
+</pluginManagement>
 </build>
 
 <profiles>
@@ -339,5 +351,38 @@
           <quarkus.native.enabled>true</quarkus.native.enabled>
       </properties>
   </profile>
+  <profile>
+      <id>coverage</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                <formats>
+                    <format>XML</format>
+                </formats>
+            </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 </profiles>
 </project>
