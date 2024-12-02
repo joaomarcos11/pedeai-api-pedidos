@@ -19,7 +19,7 @@
   <lombok.version>1.18.34</lombok.version>
   <jacoco.version>0.8.12</jacoco.version>
   <!-- <property name="sonar.java.binaries" value="target"/> -->
-  <sonar.java.binaries>target/</sonar.java.binaries>
+  <!-- <sonar.java.binaries>target/</sonar.java.binaries> -->
   <!-- <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
   <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
   <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
