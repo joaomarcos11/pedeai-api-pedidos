@@ -10,7 +10,6 @@ import org.jfm.domain.entities.enums.Status;
 
 public interface PedidoUseCase {
     // public Pagamento criar(Pedido pedido);
-
     public UUID criar(Pedido pedido);
 
     public List<Pedido> listar();
