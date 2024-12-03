@@ -73,6 +73,7 @@ public class PedidoService implements PedidoUseCase {
             try {
                 System.out.println("///// PASSOU AQUI");
                 ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
+                System.out.println("///// PASSOU AQUI 2");
                 if (clienteDto == null) {
                     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
                 }
