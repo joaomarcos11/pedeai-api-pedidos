@@ -77,6 +77,7 @@ public class PedidoService implements PedidoUseCase {
                     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
                 }
             } catch(Exception e) {
+                System.out.println("Exception cliente: " + e.getMessage());
                 System.out.println(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
                 // throw new ClientException(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
             }
