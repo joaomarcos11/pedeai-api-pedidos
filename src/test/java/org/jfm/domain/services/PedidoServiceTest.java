@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.jboss.resteasy.reactive.RestResponse;
 import org.jfm.controller.rest.client.ClienteService;
 import org.jfm.controller.rest.client.PagamentoService;
-import org.jfm.controller.rest.dto.ClienteDto;
 import org.jfm.controller.rest.dto.PagamentoCreateDto;
 import org.jfm.controller.rest.dto.PagamentoDto;
 import org.jfm.domain.entities.Pedido;

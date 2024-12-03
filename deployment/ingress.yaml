@@ -28,10 +28,17 @@ spec:
             name: app-pedidos-svc
             port:
               number: 8080
-      - path: /clientes
+      - path: /v1/clientes
         pathType: Prefix
         backend:
           service:
             name: app-clientes-svc
+            port:
+              number: 8081
+      - path: /api/pagamento
+        pathType: Prefix
+        backend:
+          service:
+            name: app-pagamentos-svc
             port:
               number: 8081
