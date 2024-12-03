@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.resteasy.reactive.RestResponse;
 import org.jfm.controller.rest.client.ClienteService;
 import org.jfm.controller.rest.client.PagamentoService;
 import org.jfm.controller.rest.dto.ClienteDto;
@@ -71,11 +72,14 @@ public class PedidoService implements PedidoUseCase {
             // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
             try {
                 System.out.println("///// PASSOU AQUI");
-                ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
-                System.out.println("///// PASSOU AQUI 2");
-                if (clienteDto == null) {
+                RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
+                if (response.getStatus() != 200) {
                     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
                 }
+                System.out.println("///// PASSOU AQUI 2");
+                // if (clienteDto == null) {
+                //     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
+                // }
             } catch(Exception e) {
                 System.out.println("Exception cliente: " + e.getMessage());
                 System.out.println(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
