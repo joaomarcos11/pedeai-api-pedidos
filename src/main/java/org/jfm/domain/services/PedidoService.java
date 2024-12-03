@@ -52,10 +52,14 @@ public class PedidoService implements PedidoUseCase {
     public PedidoService(
         PedidoRepository pedidoRepository, 
         PedidoStatusRepository pedidoStatusRepository,
-        ItemUseCase itemUseCase) {
+        ItemUseCase itemUseCase,
+        ClienteService clienteService,
+        PagamentoService pagamentoService) {
         this.pedidoRepository = pedidoRepository;
         this.pedidoStatusRepository = pedidoStatusRepository;
         this.itemUseCase = itemUseCase;
+        this.clienteService = clienteService;
+        this.pagamentoService = pagamentoService;
     }
 
     @Override
@@ -67,6 +71,7 @@ public class PedidoService implements PedidoUseCase {
             // ClienteDto response = clienteService.buscarPorId(pedido.getIdCliente());
             // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
             try {
+                System.out.println("///// PASSOU AQUI");
                 ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
                 if (clienteDto == null) {
                     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
@@ -74,7 +79,7 @@ public class PedidoService implements PedidoUseCase {
             } catch(Exception e) {
                 System.out.println("Exception cliente: " + e.getMessage());
                 System.out.println(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
-                // throw new ClientException(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
+                throw new ClientException(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
             }
         }
 
