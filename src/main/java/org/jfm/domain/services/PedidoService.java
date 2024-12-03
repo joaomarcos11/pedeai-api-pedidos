@@ -30,9 +30,7 @@ import org.jfm.domain.ports.PedidoStatusRepository;
 import org.jfm.domain.usecases.ItemUseCase;
 import org.jfm.domain.ports.PedidoPagamentoRepository;
 import org.jfm.domain.usecases.PedidoUseCase;
-
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.Response;
 
 public class PedidoService implements PedidoUseCase {
 
@@ -70,9 +68,12 @@ public class PedidoService implements PedidoUseCase {
         pedido.validar();
 
         if (pedido.getIdCliente() != null) {
+            // PagamentoDto response = clienteService.criar(new PagamentoCreateDto(pedido.getId(), 100));
+            // ClienteDto response = clienteService.buscarPorId(pedido.getIdCliente());
+            // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
             try {
-                Response response = clienteService.buscarPorId(pedido.getIdCliente());
-                if (response.getStatus() == 404) {
+                ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
+                if (clienteDto == null) {
                     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
                 }
             } catch(Exception e) {
@@ -82,7 +83,7 @@ public class PedidoService implements PedidoUseCase {
 
         List<Item> itens = itemUseCase.listar();
         
-        UUID itemUuid = UUID.fromString("6907dc62-e579-4178-ba30-3d7e4cea021d"); //TODO: ?
+        UUID itemUuid = UUID.fromString("6907dc62-e579-4178-ba30-3d7e4cea021d");
         Item itemEscolhido = new Item();
 
         for (Item item : itens) {
@@ -101,7 +102,6 @@ public class PedidoService implements PedidoUseCase {
         pedido.setDataCriacao(Instant.now());
         pedido.setStatus(Status.AGUARDANDO_PAGAMENTO);
 
-        // TODO:
         UUID pedidoId = pedidoRepository.criar(pedido);
         pedidoStatusRepository.criar(new PedidoStatus(UUID.randomUUID(), id, null, pedido.getStatus()));
 

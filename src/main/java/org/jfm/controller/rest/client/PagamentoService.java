@@ -4,13 +4,15 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import org.jfm.controller.rest.dto.PagamentoCreateDto;
 import org.jfm.controller.rest.dto.PagamentoDto;
 
-
-@Path("api/pagamento")
+@Path("/api/pagamento")
+@ApplicationScoped
 @RegisterRestClient(configKey = "pagamento-api")
 public interface PagamentoService {
 
