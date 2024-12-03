@@ -1,5 +1,6 @@
 package org.jfm.domain.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -7,6 +8,13 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.UUID;
 
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.resteasy.reactive.RestResponse;
+import org.jfm.controller.rest.client.ClienteService;
+import org.jfm.controller.rest.client.PagamentoService;
+import org.jfm.controller.rest.dto.ClienteDto;
+import org.jfm.controller.rest.dto.PagamentoCreateDto;
+import org.jfm.controller.rest.dto.PagamentoDto;
 import org.jfm.domain.entities.Pedido;
 import org.jfm.domain.entities.PedidoStatus;
 import org.jfm.domain.entities.enums.Status;
@@ -31,9 +39,19 @@ public class PedidoServiceTest {
   
   @Inject
   PedidoService service;
-  
+
   @InjectMocks
   PedidoService serviceMock;
+
+  @RestClient
+  @Inject
+  @Mock
+  ClienteService clienteService;
+
+  @RestClient
+  @Inject
+  @Mock
+  PagamentoService pagamentoService;
 
   @Mock
   PedidoRepositoryImpl repository;
@@ -60,10 +78,38 @@ public class PedidoServiceTest {
     pedido.setIdCliente(null);
     pedido.setItens(PedidoFactory.montarItensPedidos());
 
+    PagamentoDto pagamentoDto = new PagamentoDto();
+    pagamentoDto.setStatus("approved");
+    when(pagamentoService.criar(new PagamentoCreateDto(UUID.fromString("c215b5a1-9421-4cfd-982a-00f64f470252"), 100))).thenReturn(pagamentoDto);
+
     serviceMock.criar(pedido);
 
     verify(repository, times(1)).criar(pedido);
+    verify(pedidoStatusRepository, times(2)).criar(any(PedidoStatus.class));
   }
+
+  // @Test
+  // public void testCriar() {
+  //   Pedido pedido = PedidoFactory.montar();
+  //   pedido.setId(UUID.randomUUID());
+  //   UUID clienteId = UUID.fromString("3a59178-39f8-4a28-a2c7-989a57ca7b54");
+  //   pedido.setIdCliente(clienteId);
+  //   pedido.setItens(PedidoFactory.montarItensPedidos());
+
+  //   PagamentoDto pagamentoDto = new PagamentoDto();
+  //   ClienteDto clienteDto = new ClienteDto();
+  //   // when(clienteService.criar(new PagamentoCreateDto(UUID.fromString("c215b5a1-9421-4cfd-982a-00f64f470252"), 100))).thenReturn(pagamentoDto);
+  //   when(clienteService.buscarPorId(clienteId)).thenReturn(clienteDto);
+  //   // when(clienteService.buscarPorId(clienteId)).thenReturn(RestResponse.ok());
+
+  //   pagamentoDto.setStatus("approved");
+  //   when(pagamentoService.criar(new PagamentoCreateDto(UUID.fromString("c215b5a1-9421-4cfd-982a-00f64f470252"), 100))).thenReturn(pagamentoDto);
+
+  //   serviceMock.criar(pedido);
+
+  //   verify(repository, times(1)).criar(pedido);
+  //   verify(pedidoStatusRepository, times(2)).criar(any(PedidoStatus.class));
+  // }
 
   @Test
   public void testListar() {
