@@ -1,5 +1,6 @@
 package org.jfm.controller.rest.client;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -18,6 +19,6 @@ public interface ClienteService {
 
   @GET
   @Path("/{id}")
-  @Produces(MediaType.APPLICATION_JSON)
-  ClienteDto buscarPorId(@PathParam("id") @Parameter(description = "Id do cliente", example = "63a59178-39f8-4a28-a2c7-989a57ca7b54", required = true) UUID id);
+  @Produces(MediaType.TEXT_PLAIN)
+  Object buscarPorId(@PathParam("id") @Parameter(description = "Id do cliente", example = "63a59178-39f8-4a28-a2c7-989a57ca7b54", required = true) UUID id);
 }

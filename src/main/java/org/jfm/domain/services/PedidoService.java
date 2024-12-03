@@ -72,14 +72,15 @@ public class PedidoService implements PedidoUseCase {
             // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
             try {
                 System.out.println("///// PASSOU AQUI");
-                ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
+                Object clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
+                System.out.println(clienteDto.toString());
                 // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
                 // if (response.getStatus() != 200) {
                 //     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
                 // }
-                if (clienteDto == null) {
-                    throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
-                }
+                // if (clienteDto == null) {
+                //     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
+                // }
                 System.out.println("///// PASSOU AQUI 2");
             } catch(Exception e) {
                 System.out.println("Exception cliente: " + e.getMessage());
