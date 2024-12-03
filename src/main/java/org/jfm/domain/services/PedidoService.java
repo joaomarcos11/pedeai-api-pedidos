@@ -28,7 +28,6 @@ import org.jfm.domain.exceptions.ErrosSistemaEnum;
 import org.jfm.domain.ports.PedidoRepository;
 import org.jfm.domain.ports.PedidoStatusRepository;
 import org.jfm.domain.usecases.ItemUseCase;
-import org.jfm.domain.ports.PedidoPagamentoRepository;
 import org.jfm.domain.usecases.PedidoUseCase;
 import jakarta.inject.Inject;
 
@@ -36,17 +35,13 @@ public class PedidoService implements PedidoUseCase {
 
     PedidoRepository pedidoRepository;
 
-    PedidoPagamentoRepository pedidoPagamentoRepository;
-
     PedidoStatusRepository pedidoStatusRepository;
 
     ItemUseCase itemUseCase;
 
-    @Inject
     @RestClient
     ClienteService clienteService;
 
-    @Inject
     @RestClient
     PagamentoService pagamentoService;
 
