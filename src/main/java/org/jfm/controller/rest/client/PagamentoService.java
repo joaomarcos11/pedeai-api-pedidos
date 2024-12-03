@@ -7,6 +7,9 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
 import org.jfm.controller.rest.dto.PagamentoCreateDto;
 import org.jfm.controller.rest.dto.PagamentoDto;
 
@@ -15,5 +18,6 @@ import org.jfm.controller.rest.dto.PagamentoDto;
 public interface PagamentoService {
 
   @POST
+  @Produces(MediaType.APPLICATION_JSON)
   PagamentoDto criar(@RequestBody(description = "Dados para pagamento", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = PagamentoCreateDto.class))) PagamentoCreateDto pagamento);
 }

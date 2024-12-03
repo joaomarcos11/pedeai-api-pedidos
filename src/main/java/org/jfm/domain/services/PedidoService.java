@@ -29,7 +29,6 @@ import org.jfm.domain.ports.PedidoRepository;
 import org.jfm.domain.ports.PedidoStatusRepository;
 import org.jfm.domain.usecases.ItemUseCase;
 import org.jfm.domain.usecases.PedidoUseCase;
-import jakarta.inject.Inject;
 
 public class PedidoService implements PedidoUseCase {
 
