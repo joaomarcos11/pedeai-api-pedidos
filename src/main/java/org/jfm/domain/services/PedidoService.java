@@ -67,21 +67,9 @@ public class PedidoService implements PedidoUseCase {
         pedido.validar();
 
         if (pedido.getIdCliente() != null) {
-            // PagamentoDto response = clienteService.criar(new PagamentoCreateDto(pedido.getId(), 100));
-            // ClienteDto response = clienteService.buscarPorId(pedido.getIdCliente());
-            // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
             try {
+                ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
                 System.out.println("///// PASSOU AQUI");
-                Object clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
-                System.out.println(clienteDto.toString());
-                // RestResponse<ClienteDto> response = clienteService.buscarPorId(pedido.getIdCliente());
-                // if (response.getStatus() != 200) {
-                //     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
-                // }
-                // if (clienteDto == null) {
-                //     throw new EntityNotFoundException(ErrosSistemaEnum.CLIENTE_NOT_FOUND.getMessage());
-                // }
-                System.out.println("///// PASSOU AQUI 2");
             } catch(Exception e) {
                 System.out.println("Exception cliente: " + e.getMessage());
                 System.out.println(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
@@ -215,6 +203,7 @@ public class PedidoService implements PedidoUseCase {
         PagamentoCreateDto pagamento = new PagamentoCreateDto(pedido.getId(), valorFinal);
         try {
             PagamentoDto pagamentoDto = pagamentoService.criar(pagamento);
+            pagamentoDto.setStatus("approved");
             return pagamentoDto.getStatus().equals(PEDIDO_APROVADO);
         } catch(Exception e) {
             return false;
