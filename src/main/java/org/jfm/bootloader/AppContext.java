@@ -2,7 +2,7 @@ package org.jfm.bootloader;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jfm.controller.rest.client.ClienteService;
-// import org.jfm.controller.rest.restclient.ClienteServiceClient;
+import org.jfm.controller.rest.client.PagamentoService;
 import org.jfm.domain.ports.ItemRepository;
 import org.jfm.domain.ports.PedidoRepository;
 import org.jfm.domain.ports.PedidoStatusRepository;
@@ -22,7 +22,19 @@ public class AppContext {
   };
 
   @Produces
-  public PedidoService pedidoService(PedidoRepository pedidoRepository, PedidoStatusRepository pedidoStatusRepository, ItemUseCase itemUseCase) {
-    return new PedidoService(pedidoRepository, pedidoStatusRepository, itemUseCase);
+  public PedidoService pedidoService(
+    PedidoRepository pedidoRepository, 
+    PedidoStatusRepository pedidoStatusRepository, 
+    ItemUseCase itemUseCase,
+    @RestClient ClienteService clienteService,
+    @RestClient PagamentoService pagamentoService
+  ) {
+    return new PedidoService(
+      pedidoRepository, 
+      pedidoStatusRepository, 
+      itemUseCase,
+      clienteService,
+      pagamentoService
+    );
   };
 }
