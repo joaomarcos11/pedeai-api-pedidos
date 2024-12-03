@@ -10,7 +10,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 
-@Path("/clientes")
+@Path("/v1/clientes")
 @RegisterRestClient(configKey = "cliente-api")
 public interface ClienteService {
 
