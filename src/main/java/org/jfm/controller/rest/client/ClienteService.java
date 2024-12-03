@@ -11,7 +11,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 
 @Path("/v1/clientes")
-@RegisterRestClient(configKey = "cliente-api")
+@RegisterRestClient(configKey="cliente-api")
 public interface ClienteService {
 
   @GET

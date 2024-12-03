@@ -11,7 +11,7 @@ import org.jfm.controller.rest.dto.PagamentoCreateDto;
 import org.jfm.controller.rest.dto.PagamentoDto;
 
 @Path("/api/pagamento")
-@RegisterRestClient(configKey = "pagamento-api")
+@RegisterRestClient(configKey="pagamento-api")
 public interface PagamentoService {
 
   @POST
