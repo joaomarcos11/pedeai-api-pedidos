@@ -68,11 +68,8 @@ public class PedidoService implements PedidoUseCase {
 
         if (pedido.getIdCliente() != null) {
             try {
-                ClienteDto clienteDto = clienteService.buscarPorId(pedido.getIdCliente());
-                System.out.println("///// PASSOU AQUI");
+                clienteService.buscarPorId(pedido.getIdCliente());
             } catch(Exception e) {
-                System.out.println("Exception cliente: " + e.getMessage());
-                System.out.println(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
                 throw new ClientException(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
             }
         }

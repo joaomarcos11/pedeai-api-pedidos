@@ -120,26 +120,26 @@ public class ItemResourceTest {
   // BDD
   // Feature: Buscar um item específico pelo ID
   //   Scenario: Successfully retrieve an item by ID
-  // @Test
-  // public void testBuscarPorId() throws Exception {
-  //   ObjectMapper mapper = new ObjectMapper();
+  @Test
+  public void testBuscarPorId() throws Exception {
+    ObjectMapper mapper = new ObjectMapper();
 
-  //   // Given the item with ID "257ae14b-8bb7-4a80-9a68-22197f72ff47" exists in the system
-  //   UUID idItem = UUID.fromString("257ae14b-8bb7-4a80-9a68-22197f72ff47");
-  //   Item item = ItemFactory.montarItem();
+    // Given the item with ID "257ae14b-8bb7-4a80-9a68-22197f72ff47" exists in the system
+    UUID idItem = UUID.fromString("257ae14b-8bb7-4a80-9a68-22197f72ff47");
+    Item item = ItemFactory.montarItem();
 
-  //   Mockito.when(itemUseCase.buscarPorId(idItem)).thenReturn(item);
+    Mockito.when(itemUseCase.buscarPorId(idItem)).thenReturn(item);
 
-  //   // When I send a GET request to "/{id}" with the ID "257ae14b-8bb7-4a80-9a68-22197f72ff47"
-  //   // Then the response status should be 200
-  //   // And the response body should contain the item details
-  //   given()
-  //   .contentType(ContentType.JSON)
-  //   .when().pathParam("id", item.getId())
-  //   .get("/itens/{id}")
-  //   .then().statusCode(200)
-  //   .body(is(mapper.writeValueAsString(item)));
-  // }
+    // When I send a GET request to "/{id}" with the ID "257ae14b-8bb7-4a80-9a68-22197f72ff47"
+    // Then the response status should be 200
+    // And the response body should contain the item details
+    given()
+    .contentType(ContentType.JSON)
+    .when().pathParam("id", item.getId())
+    .get("/itens/{id}")
+    .then().statusCode(200)
+    .body(is(mapper.writeValueAsString(item)));
+  }
 
   // @Test
   // public void testRemoverException() {
