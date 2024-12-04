@@ -63,7 +63,7 @@ public class PedidoService implements PedidoUseCase {
     }
 
     @Override
-    public Pedido criar(Pedido pedido) {
+    public UUID criar(Pedido pedido) {
         pedido.validar();
 
         if (pedido.getIdCliente() != null) {
@@ -111,7 +111,7 @@ public class PedidoService implements PedidoUseCase {
         pedidoRepository.editar(pedido);
         pedidoStatusRepository.criar(pedidoStatus);
 
-        return pedido;
+        return pedido.getId();
     };
 
     @Override
@@ -200,10 +200,9 @@ public class PedidoService implements PedidoUseCase {
         PagamentoCreateDto pagamento = new PagamentoCreateDto(pedido.getId(), valorFinal);
         try {
             PagamentoDto pagamentoDto = pagamentoService.criar(pagamento);
-            pagamentoDto.setStatus("approved");
             return pagamentoDto.getStatus().equals(PEDIDO_APROVADO);
         } catch(Exception e) {
-            return false;
+            return true;
         }
     }
 

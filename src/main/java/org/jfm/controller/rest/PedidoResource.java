@@ -69,9 +69,9 @@ public class PedidoResource {
                         @RequestBody(description = "Dados do pedido para criação", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = PedidoCreateDto.class))) PedidoCreateDto pedido) {
                 Pedido pedidoEntity = pedidoMapper.toDomain(pedido);
                 // UUID pedidoId = pedidoUseCase.criar(pedidoEntity);
-                Pedido pedidoCriado = pedidoUseCase.criar(pedidoEntity);
+                UUID id = pedidoUseCase.criar(pedidoEntity);
                 // Pagamento pedidoPagamento = pedidoUseCase.criar(pedidoEntity);
-                return Response.status(Response.Status.CREATED).entity(pedidoCriado).build();
+                return Response.status(Response.Status.CREATED).entity(id).build();
                 // return Response.status(Response.Status.CREATED).entity(pedidoId).build();
         }
 
