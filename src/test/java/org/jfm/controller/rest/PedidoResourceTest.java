@@ -54,7 +54,7 @@ public class PedidoResourceTest {
     pedido.setItens(PedidoFactory.montarItensPedidos());
 
     Mockito.when(pedidoMapper.toDomain(dto)).thenReturn(pedido);
-    Mockito.when(pedidoUseCase.criar(pedido)).thenReturn(pedido);
+    Mockito.when(pedidoUseCase.criar(pedido)).thenReturn(pedido.getId());
 
     given()
       .contentType(ContentType.JSON)
