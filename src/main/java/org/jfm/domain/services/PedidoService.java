@@ -70,7 +70,7 @@ public class PedidoService implements PedidoUseCase {
             try {
                 clienteService.buscarPorId(pedido.getIdCliente());
             } catch(Exception e) {
-                throw new ClientException(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
+                System.out.println(ErrosSistemaEnum.FALHA_COMUNICACAO.getMessage());
             }
         }
 
